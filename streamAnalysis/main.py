@@ -173,9 +173,9 @@ describe = False
 
 for stream in range(1,max(df['#stream'].unique())):
 	print '++++++++++++++++++++ ', stream, ' +++++++++++++++++++++++'
-	#getBrowserInfo(connectStat, stream, describe)
-	#getISPInfo(connectStat, stream, describe)
+	getBrowserInfo(connectStat, stream, describe)
+	getISPInfo(connectStat, stream, describe)
 	browserISPRelation(stream)
-	#connectionTrueZeroRelation(stream)
-	#connectionStats(stream)
+	connectionTrueZeroRelation(stream)
+	connectionStats(stream)
 
