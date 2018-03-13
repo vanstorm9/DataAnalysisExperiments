@@ -1,4 +1,7 @@
 import pandas as pd
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
 
 def getBrowserInfo(connectStat, stream, describe):
 	print '\n\n'
@@ -82,6 +85,19 @@ def browserISPRelation(stream):
 	print '\n\n\n'
 
 
+def plotResults(objects, valueList, title, inc, path):
+	y_pos = np.arange(len(objects))
+	performance = valueList
+	 
+	plt.bar(y_pos, performance, align='center', alpha=0.5)
+	plt.xticks(y_pos, objects)
+	#plt.ylabel('Usage')
+
+	title = title + ' ' + str(inc)
+	plt.title(title)
+	plt.savefig(path)	 
+	plt.close()
+
 def connectionTrueZeroRelation(stream):
 	print '\n\n'
 	print 'Connection True, but zero p2p: stream ', stream
@@ -95,12 +111,31 @@ def connectionTrueZeroRelation(stream):
 	#browseList = df['browser'].unique()
 	ispList = df['isp'].unique()
 
+	sumList = []
 
 	for isp in ispList:
 		ispStream = df['isp'] == isp 
 		print 'isp: [', isp, ']'
-		print df[rankStream & ispStream & zeroStream & cnt]['browser'].value_counts()
+		valCon = df[rankStream & ispStream & zeroStream & cnt]['browser'].value_counts()
+		print valCon
+		sumList.append(valCon)
+
+
 		print '-----------'		
+
+	result = None
+	for i in range(0,len(sumList)):
+		if i == 0:
+			result = sumList[0]
+		else:
+			result = result.add(sumList[i], fill_value=0)
+
+	inds = np.array(result.index.tolist()).argsort()
+	resultAr = np.array(result.tolist())[inds]
+
+	path = './connect_p2p_zero/' + str(stream) + '.png'
+	plotResults(result.index.tolist(), resultAr, '# of browsers that is connected with p2p equal zero: stream ', stream, path)
+
 
 	print '\n\n\n'
 
@@ -110,7 +145,7 @@ def connectionStats(stream):
 	print df[rankStream]['connected'].value_counts()
 	print '\n\n\n'
 
-df = pd.read_csv('./data.csv')
+df = pd.read_csv('../../data.csv')
 
 connectStat = True
 #connectStat = False
