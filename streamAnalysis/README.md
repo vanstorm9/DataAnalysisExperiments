@@ -16,9 +16,10 @@ Then analysis was conducted to find the relationship with the data and any anoma
  
 While analyzing the relationship between the connected column with the  browser and isp, I have noticed that a fraction of the p2p values were close to zero despite the user being connected to streamroot network (connected = true). For whatever, the data streaming uses only cdn and no p2p during download transmission at the time. 
 
-In comparison to all browsers in all of the streams, the browser “Iron” seem to be the one to not use p2p despite being connected to streamroot (dominating stream 1, 2, 3, 5, and 8). Even Earthworm, a widely used browser in the dataset, seems to fall in comparison Iron, making the need for investigation and repair for Iron compatibility more urgent. 
+In comparison to all browsers in all of the streams, the browser “Iron” seem to be the one to not use p2p despite being connected to streamroot (dominating stream 1, 2, 4, 5, and 8). Even Earthworm, a widely used browser in the dataset, seems to fall in comparison Iron in most streams, making the need for investigation and repair for Iron compatibility more urgent. (Note: For some reason, there was a spike of browser use that is connected with zero p2p for Vectrice)
 
 An inspection and repair is recommended on to why Iron refuses to get support from p2p, using most of cdn to download content despite being connected to the streamroot network.
+
 
 
 

@@ -51,7 +51,7 @@ def getISPInfo(connectStat, stream, describe):
 	print 'ISP Frequencies:'
 	print df[rankStream]['isp'].value_counts()
 	print '---------------------'
-	
+
 	for isp in ispList:
 		ispStream = df['isp'] == isp 
 		print 'isp: [', isp, ']'
@@ -60,6 +60,7 @@ def getISPInfo(connectStat, stream, describe):
 			print df[rankStream][ispStream & cnt].describe()
 		print df[rankStream & ispStream]['connected'].value_counts()
 		print '-----------'		
+
 
 	print '\n\n\n'
 
@@ -75,14 +76,30 @@ def browserISPRelation(stream):
 	#browseList = df['browser'].unique()
 	ispList = df['isp'].unique()
 
-
+	sumList = []
 	for isp in ispList:
 		ispStream = df['isp'] == isp 
 		print 'isp: [', isp, ']'
-		print df[rankStream & ispStream]['browser'].value_counts()
+		browsList =  df[rankStream & ispStream]['browser'].value_counts()
+		print browsList
+		sumList.append(browsList)
 		print '-----------'		
 
 	print '\n\n\n'
+
+
+	result = None
+	for i in range(0,len(sumList)):
+		if i == 0:
+			result = sumList[0]
+		else:
+			result = result.add(sumList[i], fill_value=0)
+	inds = np.array(result.index.tolist()).argsort()
+	resultAr = np.array(result.tolist())[inds]
+
+	path = './isp_use/' + str(stream) + '.png'
+	plotResults(result.index.tolist(), resultAr, '# of isp use: stream ', stream, path)
+
 
 
 def plotResults(objects, valueList, title, inc, path):
@@ -156,9 +173,9 @@ describe = False
 
 for stream in range(1,max(df['#stream'].unique())):
 	print '++++++++++++++++++++ ', stream, ' +++++++++++++++++++++++'
-	getBrowserInfo(connectStat, stream, describe)
-	getISPInfo(connectStat, stream, describe)
+	#getBrowserInfo(connectStat, stream, describe)
+	#getISPInfo(connectStat, stream, describe)
 	browserISPRelation(stream)
-	connectionTrueZeroRelation(stream)
-	connectionStats(stream)
+	#connectionTrueZeroRelation(stream)
+	#connectionStats(stream)
 
