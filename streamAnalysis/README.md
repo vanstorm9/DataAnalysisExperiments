@@ -18,7 +18,7 @@ While analyzing the relationship between the connected column with the  browser 
 
 In comparison to all browsers in all of the streams, the browser “Iron” seem to be the one to not use p2p despite being connected to streamroot (dominating stream 1, 2, 4, 5, and 8). Even Earthworm, a widely used browser in the dataset, seems to fall in comparison Iron in most streams, making the need for investigation and repair for Iron compatibility more urgent. (Note: For some reason, there was a spike of browser use that is connected with zero p2p for Vectrice).
 
-Please refer to the images in the "connect_p2p_zero" folder for reference.
+**Please refer to the images in the "connect_p2p_zero" folder for reference.**
 
 An inspection and repair is recommended on to why Iron refuses to get support from p2p, using most of cdn to download content despite being connected to the streamroot network.
 
