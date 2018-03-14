@@ -40,7 +40,7 @@ However, this simply could be a result of the lack of Swamp and Vectrice users a
 ## More p2p optimization recommended for Olga
 I noticed that the values of p2p while being connected to streamroot is quite low. 
 
-However, this simply could be a result of the lack of Olga users and that there usually isn’t two members using those browsers who are watching the same video at the same time.
+However, this simply could be a result of the lack of Olga users and that there usually isn’t two members using those service providers who are watching the same video at the same time.
 
 
 
